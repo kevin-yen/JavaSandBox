@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "me.khyen.test.JavaSandBox"
+
+run {
+	if (project.hasProperty('exec.args')) {
+		args project.getProperty('exec.args').split()
+	}
+}
+
+repositories {
+	mavenCentral();
+}
+
+dependencies {
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.9'
+	compile group: 'org.json', name: 'json', version: '20151123'
+	compile group: 'org.eclipse.mylyn.github', name: 'org.eclipse.egit.github.core', version: '2.1.5'
+}
