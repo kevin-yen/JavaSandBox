@@ -1,20 +1,24 @@
-apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "me.khyen.test.JavaSandBox"
+
+dependencies {
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '+'
+	compile group: 'commons-cli', name: 'commons-cli', version: '+'
+	compile group: 'commons-codec', name: 'commons-codec', version: '+'
+	compile group: 'commons-io', name: 'commons-io', version: '+'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '+'
+	compile group: 'org.eclipse.mylyn.github', name: 'org.eclipse.egit.github.core', version: '+'
+	compile group: 'org.json', name: 'json', version: '+'
+}
 
 run {
-	if (project.hasProperty('exec.args')) {
-		args project.getProperty('exec.args').split()
+	mainClassName = "me.khyen.test.JavaSandBox"
+
+	if (project.hasProperty('execArgs')) {
+		args project.getProperty('execArgs').split()
 	}
 }
 
 repositories {
 	mavenCentral();
-}
-
-dependencies {
-	compile group: 'commons-codec', name: 'commons-codec', version: '1.9'
-	compile group: 'org.json', name: 'json', version: '20151123'
-	compile group: 'org.eclipse.mylyn.github', name: 'org.eclipse.egit.github.core', version: '2.1.5'
 }
