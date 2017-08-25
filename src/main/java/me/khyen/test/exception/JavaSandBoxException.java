@@ -6,6 +6,7 @@ package me.khyen.test.exception;
 public class JavaSandBoxException extends Exception {
 
 	public JavaSandBoxException() {
+		super();
 	}
 
 	public JavaSandBoxException(String msg) {
