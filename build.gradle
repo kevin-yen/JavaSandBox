@@ -1,23 +1,11 @@
-buildscript {
-	repositories {
-		jcenter()
-	}
-}
-
 plugins {
-	id 'nebula.lint' version '7.4.0'
+	id 'nebula.lint' version '8.2.2'
+	id 'application'
 }
 
-apply plugin: 'application'
+gradleLint.rules = ['all-dependency']
 
 dependencies {
-	compile group: 'ch.qos.logback', name: 'logback-classic', version: '+'
-	compile group: 'commons-cli', name: 'commons-cli', version: '+'
-	compile group: 'commons-codec', name: 'commons-codec', version: '+'
-	compile group: 'commons-io', name: 'commons-io', version: '+'
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '+'
-	compile group: 'org.eclipse.mylyn.github', name: 'org.eclipse.egit.github.core', version: '+'
-	compile group: 'org.json', name: 'json', version: '+'
 }
 
 run {
