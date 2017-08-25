@@ -1,5 +1,14 @@
-apply plugin: 'application'
+buildscript {
+	repositories {
+		jcenter()
+	}
+}
 
+plugins {
+	id 'nebula.lint' version '7.4.0'
+}
+
+apply plugin: 'application'
 
 dependencies {
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '+'
