@@ -6,6 +6,10 @@ plugins {
 gradleLint.rules = ['all-dependency']
 
 dependencies {
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:3.5.2'
+    compile 'org.seleniumhq.selenium:selenium-api:3.5.2'
+	compile 'org.seleniumhq.selenium:selenium-support:3.5.2'
+	runtime 'ch.qos.logback:logback-classic:1.2.3'
 }
 
 run {
