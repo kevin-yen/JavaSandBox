@@ -20,18 +20,42 @@ public abstract class Page {
 		wait = new WebDriverWait(webDriver, TIMEOUT_IN_SECONDS);
 	}
 
-	protected void clear(String xpath) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	protected void clear(By by) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
-		WebElement webElement = webDriver.findElement(By.xpath(xpath));
+		WebElement webElement = webDriver.findElement(by);
 
 		webElement.clear();
 	}
 
-	protected void click(String xpath) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	protected void click(By by) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
-		WebElement webElement = webDriver.findElement(By.xpath(xpath));
+		WebElement webElement = webDriver.findElement(by);
+
+		webElement.click();
+	}
+
+	protected void type(By by, String text) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+
+		WebElement webElement = webDriver.findElement(by);
+
+		webElement.sendKeys(text);
+	}
+
+	protected void clear(String cssSelector) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+
+		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
+
+		webElement.clear();
+	}
+
+	protected void click(String cssSelector) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+
+		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
 
 		webElement.click();
 	}
@@ -40,10 +64,10 @@ public abstract class Page {
 		webDriver.get(url);
 	}
 
-	protected void type(String xpath, String text) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	protected void type(String cssSelector, String text) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
 
-		WebElement webElement = webDriver.findElement(By.xpath(xpath));
+		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
 
 		webElement.sendKeys(text);
 	}
