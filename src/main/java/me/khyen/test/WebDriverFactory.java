@@ -2,6 +2,7 @@ package me.khyen.test;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -32,9 +33,7 @@ public class WebDriverFactory {
 	}
 
 	private static void createWebDriverAndJavascriptExecutor() {
-		if ("firefox".equals(System.getenv("browser.type"))) {
-			System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver/0.18.0/linux64/geckodriver");
-
+		if ("firefox".equals(System.getenv("browser"))) {
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 
 			firefoxOptions.addPreference("browser.download.dir", ".");
@@ -46,15 +45,23 @@ public class WebDriverFactory {
 			firefoxOptions.addPreference("dom.max_chrome_script_run_time", 300);
 			firefoxOptions.addPreference("dom.max_script_run_time", 300);
 
-			firefoxOptions.setBinary(System.getenv("firefox.bin"));
+			if (System.getenv("firefox.bin") != null) {
+				firefoxOptions.setBinary(System.getenv("firefox.bin"));
+			}
 
 			FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxOptions);
 
 			webDriver = firefoxDriver;
 			javascriptExecutor = firefoxDriver;
 		}
+		else if ("chrome".equals(System.getenv("browser"))) {
+			ChromeDriver chromeDriver = new ChromeDriver();
+
+			webDriver = chromeDriver;
+			javascriptExecutor = chromeDriver;
+		}
 		else {
-			throw new IllegalArgumentException("Invalid browser type " + System.getenv("browser.type"));
+			throw new IllegalArgumentException("Invalid browser '" + System.getenv("browser") + "'");
 		}
 	}
 

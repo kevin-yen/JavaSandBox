@@ -1,0 +1,7 @@
+run {
+    if (hasProperty("firefoxBin")) {
+        environment("firefox.bin", firefoxBin)
+    }
+
+    systemProperty "webdriver.chrome.driver", "src/main/resources/chromedriver/2.31/linux64/chromedriver"
+}
