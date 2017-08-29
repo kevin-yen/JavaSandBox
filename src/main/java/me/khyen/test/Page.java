@@ -43,32 +43,8 @@ public abstract class Page {
 		webElement.sendKeys(text);
 	}
 
-	protected void clear(String cssSelector) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-
-		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
-
-		webElement.clear();
-	}
-
-	protected void click(String cssSelector) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-
-		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
-
-		webElement.click();
-	}
-
 	protected void open(String url) {
 		webDriver.get(url);
-	}
-
-	protected void type(String cssSelector, String text) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-
-		WebElement webElement = webDriver.findElement(By.cssSelector(cssSelector));
-
-		webElement.sendKeys(text);
 	}
 
 }
