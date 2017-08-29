@@ -1,5 +1,8 @@
 package me.khyen.test;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -31,8 +34,41 @@ public class JavaSandBox {
 
 		WebDriver webDriver = firefoxDriver;
 
+		webDriver.get("http://www.google.com");
+
+		JavascriptExecutor javascriptExecutor = firefoxDriver;
+
+		String unicode = "\u5730\u7403\u304B\u3089\u3001\u5B87\u5B99\u306E\u679C\u3066\u3078";
+
+		System.out.println(unicode);
+
+		unicode = unicode.replace("\\", "\\\\");
+
+		System.out.println(unicode);
+
+		unicode = StringEscapeUtils.escapeJavaScript(unicode);
+
+		System.out.println(unicode);
+
+		// unicode = StringEscapeUtils.unescapeJava(unicode);
+
+		// System.out.println(unicode);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("console.log(\"");
+		sb.append(unicode);
+		sb.append("\");");
+
+		System.out.println(sb.toString());
+
+		Thread.sleep(5000);
+
+		javascriptExecutor.executeScript(sb.toString());
+
+		Thread.sleep(10000);
+
 		webDriver.quit();
 	}
-
 
 }
