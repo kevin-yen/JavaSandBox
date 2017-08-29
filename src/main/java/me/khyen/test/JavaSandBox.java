@@ -23,8 +23,8 @@ public class JavaSandBox {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<h2 class=\"text-center\">Hello</h2>\n");
-		sb.append("<p class=\"text-center\">World!</p>");
+		sb.append("<h2 class=\"text-center\">Space Program 大学生涯教育</h2>\n");
+		sb.append("<p class=\"text-center\">地球から、宇宙の果てへ</p>");
 
 		addWebContentPage.addSourceWebContent(sb.toString());
 
