@@ -11,8 +11,7 @@ public abstract class Page {
 	private final long TIMEOUT_IN_SECONDS = 10;
 
 	protected static WebDriver webDriver;
-
-	private WebDriverWait wait;
+	protected static WebDriverWait wait;
 
 	protected Page(WebDriver webDriver) {
 		this.webDriver = webDriver;
