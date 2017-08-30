@@ -17,12 +17,14 @@ public class LoginPage extends Page {
 		webDriver.get("https://test.salesforce.com/");
 	}
 
-	public void login(String username, String password) {
+	public HomePage login(String username, String password) {
 		type(usernameInput, username);
 
 		type(passwordInput, password);
 
 		click(loginButton);
+
+		return new HomePage(webDriver);
 	}
 
 }

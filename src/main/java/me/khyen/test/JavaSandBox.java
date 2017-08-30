@@ -15,7 +15,13 @@ public class JavaSandBox {
 
 		loginPage.open();
 
-		loginPage.login(System.getProperty("salesforce.username"), System.getProperty("salesforce.password"));
+		HomePage homePage = loginPage.login(System.getProperty("salesforce.username"), System.getProperty("salesforce.password"));
+
+		OpportunitiesPage opportunitiesPage = homePage.openOpportunitiesPage();
+
+		opportunitiesPage.openWindow();
+
+		Thread.sleep(10000);
 
 		webDriver.quit();
 	}
