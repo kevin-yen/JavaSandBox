@@ -41,6 +41,9 @@ run {
 	}
 
 	environment("browser", browser)
+
+	systemProperty "salesforce.username", salesforceUsername
+	systemProperty "salesforce.password", salesforcePassword
 }
 
 repositories {
