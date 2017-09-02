@@ -28,14 +28,14 @@ public abstract class Page {
 	}
 
 	protected void click(By by) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		wait.until(ExpectedConditions.elementToBeClickable(by));
 
 		WebElement webElement = webDriver.findElement(by);
 
 		webElement.click();
 	}
 
-	protected void type(By by, String text) {
+	protected void type(By by, CharSequence text) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
 		WebElement webElement = webDriver.findElement(by);
