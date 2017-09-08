@@ -1,8 +1,5 @@
 package me.khyen.test;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +28,10 @@ public class Node {
 		children.add(childNode);
 
 		return childNode;
+	}
+
+	public List<Node> getChildren() {
+		return children;
 	}
 
 	public long getDuration() {
@@ -85,23 +86,6 @@ public class Node {
 		sb.append("}");
 
 		return sb.toString();
-	}
-
-	public JSONObject toJSONObject() {
-		JSONArray jsonArray = new JSONArray();
-
-		for (Node node : children) {
-			jsonArray.put(node.toJSONObject());
-		}
-
-		JSONObject jsonObject = new JSONObject();
-
-		jsonObject.put("name", name);
-		jsonObject.put("timestamp", timestamp.getTime());
-		jsonObject.put("duration", duration);
-		jsonObject.put("children", jsonArray);
-
-		return jsonObject;
 	}
 
 }
