@@ -6,6 +6,7 @@ plugins {
 gradleLint.rules = ['all-dependency']
 
 dependencies {
+	compile group: 'org.json', name: 'json', version: '20170516'
 }
 
 run {
