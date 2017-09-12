@@ -1,0 +1,29 @@
+import de.undercouch.gradle.tasks.download.Download
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "de.undercouch:gradle-download-task:3.2.0"
+    }
+}
+
+apply plugin: "de.undercouch.download"
+
+run {
+    systemProperty "webdriver.gecko.driver", "build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver"
+}
+
+task downloadWebDriver(type: Download) {
+    src "https://github.com/mozilla/geckodriver/releases/download/v${geckoDriverVersion}/geckodriver-v${geckoDriverVersion}-${operatingSystem}.tar.gz"
+    dest file("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz")
+    overwrite false
+}
+
+task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
+    from tarTree(resources.gzip("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz"))
+    into file("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}")
+}
+
+run.dependsOn unzipWebDriver

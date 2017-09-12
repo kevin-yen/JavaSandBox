@@ -1,8 +1,13 @@
 plugins {
+	id "de.undercouch.download" version "3.2.0"
 	id "nebula.lint" version "8.2.2"
 	id "net.saliman.properties" version "1.4.6"
 	id "application"
 }
+
+import OperatingSystem
+
+project.ext.operatingSystem = OperatingSystem.current().toString()
 
 def browser = hasProperty("browser") ? browser : "firefox"
 def browserScript = file("gradle/${browser}-env.gradle")
@@ -16,10 +21,11 @@ apply from: browserScript
 gradleLint.rules = ["all-dependency"]
 
 dependencies {
-	compile "org.seleniumhq.selenium:selenium-firefox-driver:3.5.2"
-	compile "org.seleniumhq.selenium:selenium-chrome-driver:3.5.2"
-	compile "org.seleniumhq.selenium:selenium-api:3.5.2"
-	compile "org.seleniumhq.selenium:selenium-support:3.5.2"
+	compile "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
+	compile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
+	compile "org.seleniumhq.selenium:selenium-ie-driver:${seleniumVersion}"
+	compile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
+	compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
 	runtime "ch.qos.logback:logback-classic:1.2.3"
 }
 

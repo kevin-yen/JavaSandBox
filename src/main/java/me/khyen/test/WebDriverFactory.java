@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class WebDriverFactory {
 
@@ -36,15 +37,6 @@ public class WebDriverFactory {
 		if ("firefox".equals(System.getenv("browser"))) {
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-			firefoxOptions.addPreference("browser.download.dir", ".");
-			firefoxOptions.addPreference("browser.download.folderList", 2);
-			firefoxOptions.addPreference("browser.download.manager.showWhenStarting", false);
-			firefoxOptions.addPreference("browser.download.useDownloadDir", true);
-			firefoxOptions.addPreference("browser.helperApps.alwaysAsk.force", false);
-			firefoxOptions.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/excel,application/msword,application/pdf,application/zip,audio/mpeg3,image/jpeg,image/png,text/plain");
-			firefoxOptions.addPreference("dom.max_chrome_script_run_time", 300);
-			firefoxOptions.addPreference("dom.max_script_run_time", 300);
-
 			if (System.getenv("firefox.bin") != null) {
 				firefoxOptions.setBinary(System.getenv("firefox.bin"));
 			}
@@ -59,6 +51,12 @@ public class WebDriverFactory {
 
 			webDriver = chromeDriver;
 			javascriptExecutor = chromeDriver;
+		}
+		else if ("ie".equals(System.getenv("ie"))) {
+			InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver();
+
+			webDriver = internetExplorerDriver;
+			javascriptExecutor = internetExplorerDriver;
 		}
 		else {
 			throw new IllegalArgumentException("Invalid browser '" + System.getenv("browser") + "'");

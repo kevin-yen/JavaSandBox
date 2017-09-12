@@ -1,7 +1,29 @@
-run {
-    if (hasProperty("firefoxBin")) {
-        environment("firefox.bin", firefoxBin)
-    }
+import de.undercouch.gradle.tasks.download.Download
 
-    systemProperty "webdriver.chrome.driver", "src/main/resources/chromedriver/2.31/linux64/chromedriver"
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "de.undercouch:gradle-download-task:3.2.0"
+    }
 }
+
+apply plugin: "de.undercouch.download"
+
+run {
+    systemProperty "webdriver.chrome.driver", "build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver"
+}
+
+task downloadWebDriver(type: Download) {
+    src "https://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${operatingSystem}.zip"
+    dest file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip")
+    overwrite false
+}
+
+task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
+    from zipTree(file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip"))
+    into file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}")
+}
+
+run.dependsOn unzipWebDriver

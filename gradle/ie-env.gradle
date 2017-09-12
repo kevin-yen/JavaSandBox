@@ -1,0 +1,45 @@
+import de.undercouch.gradle.tasks.download.Download
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "de.undercouch:gradle-download-task:3.2.0"
+    }
+}
+
+apply plugin: "de.undercouch.download"
+
+run {
+    systemProperty "webdriver.ie.driver", "build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/IEDriverServer.exe"
+}
+
+task downloadWebDriver(type: Download) {
+    String ieDriverServerOs
+
+    if (operatingSystem == "win32") {
+        ieDriverServerOs = "Win32"
+    }
+    else if (operatingSystem == "win64") {
+        ieDriverServerOs = "x64"
+    }
+    else {
+        throw new IllegalStateException("Internet Explorer is not supported on your operating system")
+    }
+
+    Version ieSeleniumVersion = "${Version.majorVersion(seleniumVersion)}.${Version.minorVersion(seleniumVersion)}"
+
+    println "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
+
+    src "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
+    dest file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip")
+    overwrite false
+}
+
+task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
+    from zipTree(file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip"))
+    into file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}")
+}
+
+run.dependsOn unzipWebDriver

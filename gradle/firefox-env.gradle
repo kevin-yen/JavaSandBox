@@ -1,7 +1,11 @@
+import Version
+
 run {
     if (hasProperty("firefoxBin")) {
         environment("firefox.bin", firefoxBin)
     }
+}
 
-    systemProperty "webdriver.gecko.driver", "src/main/resources/geckodriver/0.18.0/linux64/geckodriver"
+if (Version.majorVersion(seleniumVersion) > 2) {
+    apply from: "gradle/geckodriver.gradle"
 }
