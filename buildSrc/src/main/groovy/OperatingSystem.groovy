@@ -13,7 +13,7 @@ class OperatingSystem {
             name = "mac"
         }
         else if (GroovyOperatingSystem.current().isWindows()) {
-            name = "window"
+            name = "win"
         }
         else {
             name = "unix"

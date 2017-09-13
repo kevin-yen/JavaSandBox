@@ -7,7 +7,11 @@ plugins {
 
 import OperatingSystem
 
-project.ext.operatingSystem = OperatingSystem.current().toString()
+ext {
+	if (!project.hasProperty("operatingSystem")) {
+		operatingSystem = OperatingSystem.current().toString()
+	}
+}
 
 def browser = hasProperty("browser") ? browser : "firefox"
 def browserScript = file("gradle/${browser}-env.gradle")
