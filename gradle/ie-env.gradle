@@ -28,7 +28,7 @@ task downloadWebDriver(type: Download) {
         throw new IllegalStateException("Internet Explorer is not supported on your operating system")
     }
 
-    Version ieSeleniumVersion = "${Version.majorVersion(seleniumVersion)}.${Version.minorVersion(seleniumVersion)}"
+    String ieSeleniumVersion = "${Version.majorVersion(seleniumVersion)}.${Version.minorVersion(seleniumVersion)}"
 
     println "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
 
