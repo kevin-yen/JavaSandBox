@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverFactory {
 
@@ -52,8 +53,12 @@ public class WebDriverFactory {
 			webDriver = chromeDriver;
 			javascriptExecutor = chromeDriver;
 		}
-		else if ("ie".equals(System.getenv("ie"))) {
-			InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver();
+		else if ("ie".equals(System.getenv("browser"))) {
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
+
+			desiredCapabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://www.google.com");
+
+			InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver(desiredCapabilities);
 
 			webDriver = internetExplorerDriver;
 			javascriptExecutor = internetExplorerDriver;
