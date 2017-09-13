@@ -41,6 +41,9 @@ run {
 	}
 
 	environment("browser", browser)
+
+	systemProperty "lesa.email", lesaEmail
+	systemProperty "lesa.password", lesaPassword
 }
 
 repositories {
