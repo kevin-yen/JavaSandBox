@@ -12,18 +12,18 @@ buildscript {
 apply plugin: "de.undercouch.download"
 
 run {
-    systemProperty "webdriver.gecko.driver", "build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver"
+    systemProperty "webdriver.gecko.driver", "${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver"
 }
 
 task downloadWebDriver(type: Download) {
     src "https://github.com/mozilla/geckodriver/releases/download/v${geckoDriverVersion}/geckodriver-v${geckoDriverVersion}-${operatingSystem}.tar.gz"
-    dest file("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz")
+    dest file("${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz")
     overwrite false
 }
 
 task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
-    from tarTree(resources.gzip("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz"))
-    into file("build/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}")
+    from tarTree(resources.gzip("${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz"))
+    into file("${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}")
 }
 
 run.dependsOn unzipWebDriver

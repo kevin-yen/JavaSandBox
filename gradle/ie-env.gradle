@@ -12,7 +12,7 @@ buildscript {
 apply plugin: "de.undercouch.download"
 
 run {
-    systemProperty "webdriver.ie.driver", "build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/IEDriverServer.exe"
+    systemProperty "webdriver.ie.driver", "${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/IEDriverServer.exe"
 }
 
 task downloadWebDriver(type: Download) {
@@ -33,13 +33,13 @@ task downloadWebDriver(type: Download) {
     println "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
 
     src "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
-    dest file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip")
+    dest file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip")
     overwrite false
 }
 
 task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
-    from zipTree(file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip"))
-    into file("build/webdriver/iedriver/${seleniumVersion}/${operatingSystem}")
+    from zipTree(file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip"))
+    into file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}")
 }
 
 run.dependsOn unzipWebDriver

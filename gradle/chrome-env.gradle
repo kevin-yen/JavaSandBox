@@ -12,18 +12,18 @@ buildscript {
 apply plugin: "de.undercouch.download"
 
 run {
-    systemProperty "webdriver.chrome.driver", "build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver"
+    systemProperty "webdriver.chrome.driver", "${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver"
 }
 
 task downloadWebDriver(type: Download) {
     src "https://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${operatingSystem}.zip"
-    dest file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip")
+    dest file("${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip")
     overwrite false
 }
 
 task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
-    from zipTree(file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip"))
-    into file("build/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}")
+    from zipTree(file("${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip"))
+    into file("${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}")
 }
 
 run.dependsOn unzipWebDriver
