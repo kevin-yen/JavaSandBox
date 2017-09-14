@@ -1,9 +1,9 @@
 plugins {
-	id 'nebula.lint' version '8.2.2'
-	id 'application'
+	id "nebula.lint" version "8.2.2"
+	id "application"
 }
 
-gradleLint.rules = ['all-dependency']
+gradleLint.rules = ["all-dependency"]
 
 dependencies {
 }
@@ -11,8 +11,8 @@ dependencies {
 run {
 	mainClassName = "me.khyen.test.JavaSandBox"
 
-	if (project.hasProperty('execArgs')) {
-		args project.getProperty('execArgs').split()
+	if (project.hasProperty("execArgs")) {
+		args project.getProperty("execArgs").split()
 	}
 }
 
