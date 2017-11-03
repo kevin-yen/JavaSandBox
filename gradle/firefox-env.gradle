@@ -1,7 +1,7 @@
 import Version
 
 run {
-    if (hasProperty("firefoxBin")) {
+    if (project.hasProperty("firefoxBin")) {
         environment("firefox.bin", firefoxBin)
     }
 }
