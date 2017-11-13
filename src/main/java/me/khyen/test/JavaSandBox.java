@@ -13,13 +13,42 @@ public class JavaSandBox {
 
 		LESALoginPage LESALoginPage = new LESALoginPage(webDriver);
 
-		LESALoginPage.go();
+		Exception thrownException = null;
 
-		LESALoginPage.login(System.getProperty("lesa.email"), System.getProperty("lesa.password"));
+		while (thrownException == null) {
+			try {
+				LESALoginPage.go();
 
-		Thread.sleep(5000);
+				LoggedInPage loggedInPage = LESALoginPage.login(System.getProperty("lesa.email"), System.getProperty("lesa.password"));
+
+				System.out.println("Logging in");
+
+				long startTime = System.currentTimeMillis();
+
+				System.out.println(webDriver.getCurrentUrl());
+
+				System.out.println(System.currentTimeMillis() - startTime);
+
+				System.out.println("Logging out");
+
+				loggedInPage.logout();
+
+				startTime = System.currentTimeMillis();
+
+				System.out.println(webDriver.getCurrentUrl());
+
+				System.out.println(System.currentTimeMillis() - startTime);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+
+				thrownException = e;
+			}
+		}
 
 		webDriver.quit();
+
+		throw thrownException;
 	}
 
 }
