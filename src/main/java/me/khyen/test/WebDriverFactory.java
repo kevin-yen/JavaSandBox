@@ -3,10 +3,13 @@ package me.khyen.test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.io.File;
 
 public class WebDriverFactory {
 
@@ -36,13 +39,18 @@ public class WebDriverFactory {
 
 	private static void createWebDriverAndJavascriptExecutor() {
 		if ("firefox".equals(System.getenv("browser"))) {
-			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+
+			FirefoxDriver firefoxDriver;
 
 			if (System.getenv("firefox.bin") != null) {
-				firefoxOptions.setBinary(System.getenv("firefox.bin"));
-			}
+				FirefoxBinary firefoxBinary = new FirefoxBinary(new File(System.getenv("firefox.bin")));
 
-			FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxOptions);
+				firefoxDriver = new FirefoxDriver(firefoxBinary, firefoxProfile);
+			}
+			else {
+				firefoxDriver = new FirefoxDriver(firefoxProfile);
+			}
 
 			webDriver = firefoxDriver;
 			javascriptExecutor = firefoxDriver;
