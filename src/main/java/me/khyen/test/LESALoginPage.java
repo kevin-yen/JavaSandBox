@@ -13,7 +13,7 @@ public class LESALoginPage extends Page {
 		webDriver.get("http://www-support-2.liferay.com");
 	}
 
-	public void login(String email, String password) {
+	public LoggedInPage login(String email, String password) {
 		clear(By.id("_58_login"));
 
 		type(By.id("_58_login"), email);
@@ -21,5 +21,7 @@ public class LESALoginPage extends Page {
 		type(By.id("_58_password"), password);
 
 		click(By.cssSelector("input[type=\"submit\"]"));
+
+		return new LoggedInPage(webDriver);
 	}
 }
