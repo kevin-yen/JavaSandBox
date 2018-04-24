@@ -41,6 +41,8 @@ run {
 	}
 
 	environment("browser", browser)
+	environment("jenkinsUsername", jenkinsUsername)
+	environment("jenkinsPassword", jenkinsPassword)
 }
 
 repositories {

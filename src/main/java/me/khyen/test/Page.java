@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class Page {
 
 	private final long TIMEOUT_IN_SECONDS = 10;
+	private final long SLEEP_IN_MILLIS = 1000;
 
 	protected static WebDriver webDriver;
 	protected static WebDriverWait wait;
@@ -16,7 +17,7 @@ public abstract class Page {
 	protected Page(WebDriver webDriver) {
 		this.webDriver = webDriver;
 
-		wait = new WebDriverWait(webDriver, TIMEOUT_IN_SECONDS);
+		wait = new WebDriverWait(webDriver, TIMEOUT_IN_SECONDS, SLEEP_IN_MILLIS);
 	}
 
 	protected void clear(By by) {
