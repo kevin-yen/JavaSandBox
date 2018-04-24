@@ -15,6 +15,10 @@ run {
     systemProperty "webdriver.chrome.driver", "${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver"
 }
 
+test {
+    systemProperty "webdriver.chrome.driver", "${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver"
+}
+
 task downloadWebDriver(type: Download) {
     src "https://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${operatingSystem}.zip"
     dest file("${buildDir}/webdriver/chromedriver/${chromeDriverVersion}/${operatingSystem}/chromedriver.zip")
@@ -27,3 +31,5 @@ task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
 }
 
 run.dependsOn unzipWebDriver
+
+test.dependsOn unzipWebDriver

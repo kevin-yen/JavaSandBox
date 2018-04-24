@@ -1,0 +1,24 @@
+{
+    "alert_success": {
+        "css": "div.alert-success"
+    },
+    "button": {
+        "wait_for_not_present": {
+            "description": "Wait for this element to go away before next steps are executed",
+            "element": "spa_loading_bar"
+        },
+        "xpath": "//button/span[text()='{access_name}']"
+    },
+    "dropdown_menu_item": {
+        "xpath": "//li/a[text()='{access_name}']"
+    },
+    "link": {
+        "xpath": "//a[text()='{access_name}'] | //a[text()=' {access_name} ']"
+    },
+    "spa_loading_bar": {
+        "xpath": "//html[@class='lfr-spa-loading']"
+    },
+    "text_field": {
+        "xpath": "//label[text()=' {access_name} ']/following-sibling::input | //label[text()=' {access_name} ']/following-sibling::span/input | //input[@title=' {access_name} ']"
+    }
+}

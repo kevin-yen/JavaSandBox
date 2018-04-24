@@ -4,6 +4,7 @@
 .gradle
 
 build/
+target/
 
 gradle-app.setting
 gradle-local.properties

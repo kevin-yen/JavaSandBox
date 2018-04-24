@@ -1,6 +1,5 @@
 plugins {
 	id "de.undercouch.download" version "3.2.0"
-	id "nebula.lint" version "8.2.2"
 	id "net.saliman.properties" version "1.4.6"
 	id "application"
 }
@@ -22,18 +21,21 @@ if (!browserScript.exists()) {
 
 apply from: browserScript
 
-gradleLint.rules = ["all-dependency"]
-
 dependencies {
-	compile "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
-	compile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
-	compile "org.seleniumhq.selenium:selenium-ie-driver:${seleniumVersion}"
 	compile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
-	compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
+
+	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
+	testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
+	testCompile "org.seleniumhq.selenium:selenium-ie-driver:${seleniumVersion}"
+	testCompile "commons-io:commons-io:2.6"
+	testCompile "info.cukes:cucumber-java:1.2.5"
+	testCompile "info.cukes:cucumber-junit:1.2.5"
+	testCompile "org.json:json:20160810"
+
 	runtime "ch.qos.logback:logback-classic:1.2.3"
 }
 
-run {
+test {
 	mainClassName = "me.khyen.test.JavaSandBox"
 
 	if (project.hasProperty("execArgs")) {

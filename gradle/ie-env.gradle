@@ -12,7 +12,11 @@ buildscript {
 apply plugin: "de.undercouch.download"
 
 run {
-    systemProperty "webdriver.ie.driver", "${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/IEDriverServer.exe"
+    systemProperty "webdriver.ie.driver", "${buildDir}/webdriver/iedriver/${internetExplorerDriverVersion}/${operatingSystem}/IEDriverServer.exe"
+}
+
+test {
+    systemProperty "webdriver.ie.driver", "${buildDir}/webdriver/iedriver/${internetExplorerDriverVersion}/${operatingSystem}/IEDriverServer.exe"
 }
 
 task downloadWebDriver(type: Download) {
@@ -30,16 +34,18 @@ task downloadWebDriver(type: Download) {
 
     String ieSeleniumVersion = "${Version.majorVersion(seleniumVersion)}.${Version.minorVersion(seleniumVersion)}"
 
-    println "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
+    println "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${internetExplorerDriverVersion}.zip"
 
-    src "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${seleniumVersion}.zip"
-    dest file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip")
+    src "https://selenium-release.storage.googleapis.com/${ieSeleniumVersion}/IEDriverServer_${ieDriverServerOs}_${internetExplorerDriverVersion}.zip"
+    dest file("${buildDir}/webdriver/iedriver/${internetExplorerDriverVersion}/${operatingSystem}/iedriver.zip")
     overwrite false
 }
 
 task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
-    from zipTree(file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}/iedriver.zip"))
-    into file("${buildDir}/webdriver/iedriver/${seleniumVersion}/${operatingSystem}")
+    from zipTree(file("${buildDir}/webdriver/iedriver/${internetExplorerDriverVersion}/${operatingSystem}/iedriver.zip"))
+    into file("${buildDir}/webdriver/iedriver/${internetExplorerDriverVersion}/${operatingSystem}")
 }
 
 run.dependsOn unzipWebDriver
+
+test.dependsOn unzipWebDriver

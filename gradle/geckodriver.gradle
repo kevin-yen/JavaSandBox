@@ -15,6 +15,10 @@ run {
     systemProperty "webdriver.gecko.driver", "${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver"
 }
 
+test {
+    systemProperty "webdriver.gecko.driver", "${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver"
+}
+
 task downloadWebDriver(type: Download) {
     src "https://github.com/mozilla/geckodriver/releases/download/v${geckoDriverVersion}/geckodriver-v${geckoDriverVersion}-${operatingSystem}.tar.gz"
     dest file("${buildDir}/webdriver/geckodriver/${geckoDriverVersion}/${operatingSystem}/geckodriver.tar.gz")
@@ -27,3 +31,5 @@ task unzipWebDriver(type: Copy, dependsOn: downloadWebDriver) {
 }
 
 run.dependsOn unzipWebDriver
+
+test.dependsOn unzipWebDriver

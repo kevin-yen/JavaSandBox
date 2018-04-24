@@ -6,6 +6,12 @@ run {
     }
 }
 
+test {
+    if (project.hasProperty("firefoxBin")) {
+        environment("firefox.bin", firefoxBin)
+    }
+}
+
 if (Version.majorVersion(seleniumVersion) > 2) {
     apply from: "gradle/geckodriver.gradle"
 }
